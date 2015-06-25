@@ -4,11 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+mongoose.connection.on('error', function(err) {
+    console.error('MongoDB error: %s', err);
+});
+mongoose.connect('mongodb://localhost/website_ratings_development');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
