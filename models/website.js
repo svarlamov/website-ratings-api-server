@@ -35,7 +35,7 @@ websiteSchema.methods.getRatings = function getRatings(site, callback) {
 		ratingsArr.forEach(function(obj, index) {
 			site.ratings.push(obj);
 		});
-		calllback(null, site);
+		callback(null, site);
 	});
 }
 
