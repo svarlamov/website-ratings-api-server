@@ -53,23 +53,29 @@ router.get('/:domain', function(req, res, next) {
 
   var domain = req.params.domain;
 
-  if(!listId){
+  if(!domain){
     var errorMsg = "No domain name provided";
     res.status(401);
     res.json({ message: errorMsg });
     return;
   };
 
-  Website.findOne({ domain: domain }).populate('ratings').exec(function(err, site) {
+  Website.findOne({ domain: domain }, function(err, site) {
     if (err) {
         console.log("error");
         console.error(err);
         res.send(err);
         return;
     };
-
-    res.json(site);
-
+		site.getRatings(site, function(err, site) {
+			if(err) {
+				console.log("error");
+        console.error(err);
+        res.send(err);
+        return;
+			}
+			res.json(site);
+		});
   });
 });
 
