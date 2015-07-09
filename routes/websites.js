@@ -80,7 +80,7 @@ router.get('/:domain', function(req, res, next) {
 });
 
 // rate a site in the db, and create the site if it does not yet exist
-router.get('/:domain/rate', function(req, res, next) {
+router.post('/:domain/rate', function(req, res, next) {
   var domain = req.params.domain;
   if(!domain){
     var errorMsg = "No domain name provided";
